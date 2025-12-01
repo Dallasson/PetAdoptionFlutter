@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pet/app_router.dart';
 import 'package:pet/components/custom_button.dart';
 import 'package:pet/components/custom_edit_text.dart';
 
@@ -40,15 +42,25 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 10,),
               CustomEditText(hint: "Password", textEditingController: _passwordController, iconData: Icons.password),
               SizedBox(height: 20,),
-              Text("Forgot Your Password!",style: TextStyle(fontWeight: FontWeight.w400,color: Colors.black87,
-                  fontSize: 18),),
+              GestureDetector(
+                onTap: (){
+                  Get.toNamed(AppRouter.recoverScreen);
+                },
+                child: Text("Forgot Your Password!",style: TextStyle(fontWeight: FontWeight.w400,color: Colors.black87,
+                    fontSize: 18),),
+              ),
               SizedBox(height: 20,),
               CustomButton(text: "Login", onClick: (){
 
               }),
               SizedBox(height: 30,),
-              Text("Don't have an account ? Register",style: TextStyle(fontWeight: FontWeight.w400,color: Colors.black87,
-                  fontSize: 18),)
+              GestureDetector(
+                onTap: (){
+                  Get.toNamed(AppRouter.registerScreen);
+                },
+                child: Text("Don't have an account ? Register",style: TextStyle(fontWeight: FontWeight.w400,color: Colors.black87,
+                    fontSize: 18),),
+              )
             ],
           ),
         ),
