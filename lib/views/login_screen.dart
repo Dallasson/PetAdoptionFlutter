@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener(
+    return BlocListener<PetBloc,BlocState>(
       listener: (context,state){
         if(state is LOADING){
 

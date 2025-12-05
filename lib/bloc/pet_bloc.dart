@@ -47,4 +47,9 @@ class PetBloc extends Bloc<BlocEvent,BlocState> {
 
   }
 
+  void uploadUser(UploadUserEvent event,Emitter<BlocState> emit) async {
+
+    var isUploaded = await firebaseService.uploadUser(event.fullName! ,event.phoneNumber!, event.email!);
+    UploadUserState(isUploaded);
+  }
 }

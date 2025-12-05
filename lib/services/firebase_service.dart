@@ -19,6 +19,27 @@ class FirebaseService {
   }
 
 
+  Future<bool> uploadUser(String fullName,String phoneNumber,String email) async {
+
+    try {
+
+      var userUid = _firebaseAuth.currentUser!.uid;
+
+      var map = {
+        "fullName" : fullName,
+        "phoneNumber" : phoneNumber,
+        "email" : email,
+        "userUid" : userUid
+      };
+
+      _firebaseDatabase.ref().child("Users").child(userUid).set(map);
+      return true;
+
+    } catch(e){
+      return false;
+    }
+
+  }
 
 
 }

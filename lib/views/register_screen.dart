@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:pet/app_router.dart';
 import 'package:pet/bloc/bloc_event.dart';
 import 'package:pet/bloc/pet_bloc.dart';
 
@@ -26,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener(
+    return BlocListener<PetBloc,BlocState>(
       listener: (context,state){
         if(state is LOADING){
 
@@ -44,16 +46,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }
         else if (state is RegisterState){
 
-          setState(() {
-            isLoading = false;
-          });
-
           if(state.userCredential!.user != null){
-
+            BlocProvider.of<PetBloc>(context,listen: false).add(UploadUserEvent("fullName", "phoneNumber", "email"));
           } else {
             Fluttertoast.showToast(msg: "Failed to login in user...");
+            setState(() {
+              isLoading = false;
+            });
           }
-      }},
+      }
+        else if (state is UploadUserState){
+           var isUploaded = state.isUploaded;
+           if(isUploaded){
+             setState(() {
+               isLoading = false;
+             });
+             Fluttertoast.showToast(msg: "User has been successfully registered...");
+             Get.offAndToNamed(AppRouter.homeScreen);
+           } else {
+             setState(() {
+               isLoading = false;
+             });
+           }
+        }
+    },
       child: SafeArea(
         child: Scaffold(
           body: Padding(

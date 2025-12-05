@@ -59,3 +59,13 @@ class RegisterState extends BlocState {
   List<Object?> get props => [userCredential];
 
 }
+
+class UploadUserState extends BlocState {
+
+  final bool isUploaded;
+  UploadUserState(this.isUploaded);
+
+  @override
+  List<Object?> get props => [isUploaded];
+
+}
