@@ -8,6 +8,36 @@ abstract class BlocState extends Equatable {
 
 }
 
+
+class INITIAL extends BlocState {
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+
+}
+
+class ERROR extends BlocState {
+
+  final String? error;
+  ERROR(this.error);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [error];
+
+}
+
+class LOADING extends BlocState {
+
+  final bool isLoading;
+  LOADING(this.isLoading);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [isLoading];
+}
+
 class LoginState extends BlocState {
 
   final UserCredential? userCredential;
